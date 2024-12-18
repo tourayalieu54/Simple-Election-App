@@ -1,0 +1,151 @@
+POST http://localhost:3000/api/students
+Content-Type: application/json
+Accept: application/json
+
+{
+    "firstName": "Rohey",
+    "lastName": "Jatta",
+    "matNumber": "22222222",
+    "department": "SICT"
+}
+
+###
+POST http://localhost:3000/api/students
+Content-Type: application/json
+Accept: application/json
+
+{
+    "firstName": "Pa Sulay",
+    "lastName": "Jobe",
+    "matNumber": "11111111",
+    "department": "AI"
+}
+###
+
+PATCH http://localhost:3000/api/students/675ed3d0bef020ab8d83fc58
+Content-Type: application/json
+
+{
+    "department": "Agriculture"
+}
+###
+GET http://localhost:3000/api/students
+
+###
+GET http://localhost:3000/api/students/find/22226063
+
+###
+GET http://localhost:3000/api/students/6761b52c92756432cfec05a2
+
+###
+DELETE http://localhost:3000/api/students/675ed3d0bef020ab8d83fc58
+
+
+#################################
+
+# Candidate HTTP Tests
+POST http://localhost:3000/api/candidates
+Content-Type: application/json
+Accept: application/json
+
+{
+    "party": "Alliance Party",
+    "electionType": "General",
+    "position": "President",
+    "candidateInfo":{
+        "_id": "675f8352cfbda203da24eed4",
+        "firstName": "Fatima",
+        "middleName": "Al-Amin",
+        "lastName": "Kinteh",
+        "matNumber": "22226063",
+        "department": "ICT"
+    }
+}
+
+
+###
+POST http://localhost:3000/api/candidates
+Content-Type: application/json
+Accept: application/json
+
+{
+    "party": "Solutionist Party",
+    "electionType": "Departmental",
+    "position": "Treasurer",
+    "candidateInfo": "6760cda4db7dc19a16dd3f69"
+}
+
+
+###
+GET http://localhost:3000/api/candidates
+
+###
+GET http://localhost:3000/api/candidates/6760cd4ddb7dc19a16dd3f67
+
+###
+
+GET http://localhost:3000/api/candidates/fetch/Treasurer
+
+###
+PATCH http://localhost:3000/api/candidates/6760e5791ffbd0a973ea4eb4
+Content-Type: application/json
+
+{
+    "party": "UDP"
+}
+
+###
+DELETE http://localhost:3000/api/candidates/6760e5791ffbd0a973ea4eb4
+
+########################################################
+# Electoral officer Api tests
+
+POST http://localhost:3000/api/electoralOfficer
+Content-Type: application/json
+
+{
+    "role": "Chairman",
+    "officerInfo": "6761b52c92756432cfec05a2"
+}
+
+###
+
+POST http://localhost:3000/api/electoralOfficer
+Content-Type: application/json
+
+{
+    "role": "Coordinator",
+    "officerInfo": "6761bc9ac0640ba27742fcdc"
+}
+
+###
+
+GET http://localhost:3000/api/electoralOfficer
+
+###
+
+GET http://localhost:3000/api/electoralOfficer/6761bcc6c0640ba27742fcde
+
+###
+
+PATCH http://localhost:3000/api/electoralOfficer/6761b54492756432cfec05a4
+Content-Type: application/json
+
+{
+    "role": "Coordinator"
+}
+
+###
+
+DELETE http://localhost:3000/api/electoralOfficer/6761bcc6c0640ba27742fcde
+
+###############################################################
+# Testing my election
+
+POST http://localhost:3000/api/elections
+Content-Type: application/json
+Accept: application/json
+
+{
+    
+}
