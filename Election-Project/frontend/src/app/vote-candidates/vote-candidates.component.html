@@ -1,0 +1,31 @@
+<div *ngIf="hasVoted" style="min-height: 100vh;">
+  <h2>You have already voted. Thank you!</h2>
+</div>
+
+<div *ngIf="!hasVoted" style="min-height: 100vh;">
+  <h1>Vote for Candidates</h1>
+  <form [formGroup]="voteForms" (ngSubmit)="onSubmitVotes()">
+    <div *ngFor="let position of Object.keys(candidatesByPosition)">
+      <h3>{{ position }}</h3>
+      <div *ngFor="let candidate of candidatesByPosition[position]" class="position-card-container">
+        <div class="candidate-card">
+          <img [src]="'placeholder.jpg'" alt="Candidate Image" />
+          <div>
+            <h4>{{ candidate.candidateInfo.firstName }} {{ candidate.candidateInfo.middleName }} {{ candidate.candidateInfo.lastName }}</h4>
+            <p>Party: {{ candidate.party }}</p>
+            <label>
+              <input
+                type="radio"
+                [formControlName]="position"
+                [value]="candidate._id"
+                [disabled]="!showCheckBoxes"
+              />
+              {{ candidate.name }}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="submit" [disabled]="!showCheckBoxes">Submit Votes</button>
+  </form>
+</div>

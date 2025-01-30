@@ -1,0 +1,76 @@
+<div class="container-fluid" style="max-height: 90vh;">
+    <h1 class="text-center mb-4 pt-3">Electoral Officer Dashboard</h1>
+    <hr />
+    <div class="text-center">
+      <img src="/iec.png" alt="iec logo" class="w-25" />
+    </div>
+  
+    <div class="row">
+      <!-- Number of Approved and Unapproved Nominations -->
+      <div class="col-md-6">
+        <div class="card text-white bg-warning mb-4 shadow">
+          <div class="card-header text-center">
+            <h5 class="mb-0">Approved Candidates</h5>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title text-center">{{ approvedNominationsCount }}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card text-white bg-orange mb-4 shadow">
+          <div class="card-header text-center">
+            <h5 class="mb-0">Pending Nominations</h5>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title text-center">{{ unapprovedNominationsCount }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="mt-2 mb-2 pb-2 text-center">
+      <!-- Buttons for Managing Elections and Nominations -->
+      <button class="me-3" (click)="openCreateElectionModal()">
+        Create New Election
+      </button>
+      <button class="me-3" [routerLink]="['/manage-nominations']">
+        Manage Nominations
+      </button>
+      <button class="me-3" [routerLink]="['/vote-candidates']">
+        Vote Candidates
+      </button>
+      <button class="me-3" [routerLink]="['/election-progress']">
+        View Election Progress
+      </button>
+    </div>
+  
+    <!-- Modal for Creating Election -->
+    <div class="modal fade" [ngClass]="{'show': showModal}" [style.display]=" showModal ? 'block' : 'none'" id="createElectionModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create Election</h5>
+            <input type="button" class="btn-close" (click)="closeModal()">
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="createElectionForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="startDate" class="form-label">Start Date</label>
+                <input type="datetime-local" id="startDate" formControlName="startDate" class="form-control" required />
+              </div>
+              <div class="mb-3">
+                <label for="duration" class="form-label">Duration (in hours)</label>
+                <input type="number" id="duration" formControlName="duration" class="form-control" required min="0.1" />
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn" (click)="closeModal()">Cancel</button>
+                <button type="submit" class="btn btn-primary" [disabled]="createElectionForm.invalid">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+  

@@ -1,0 +1,125 @@
+.container{
+    min-height: 100vh;
+}
+
+.heading{
+    text-align: center;
+    margin: 3rem auto;
+    color: white;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    min-width: 40%;
+    margin: 2rem 1rem;
+}
+
+.form-label {
+    /* color: whitesmoke; */
+    font-size:x-large;
+}
+
+.form-control {
+    padding: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+button{
+    border-radius: 1rem;
+    padding: 1rem 0.5rem;
+    box-shadow: 5px 5px 8px black;
+    border: none;
+    border-top: 1px solid orange;
+    border-left: 1px solid orange;
+}
+
+button:hover{
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+
+.action-buttons{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse; /*combines the borders of each cell to one */
+    margin: 1rem 0;
+    font-size: 1rem;
+    text-align: left;
+  }
+  
+  .table th, .table td {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+  }
+  
+  .table thead {
+    background-color: #f9f9f9;
+  }
+  
+  .table-striped tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+
+  /* Responsivity Designing */
+@media (max-width: 768px) {
+    .action-buttons,
+    .form-buttons {
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: center; /* Center align for smaller screens */
+    }
+
+    .container {
+        margin-top: 1rem;
+    }
+
+    button {
+        width: 80%; /* Make buttons stretch for smaller screens */
+        margin-bottom: 1rem; /* Add spacing between stacked buttons */
+    }
+    
+}
+
+/* For my table (responsivity) */
+@media screen and (max-width: 768px) {
+    /* Scrollable table for smaller screens */
+    .table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  
+    /* Compact table rows */
+    .table th, .table td {
+      padding: 0.5rem;
+      font-size: 0.875rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+   
+     /* Stack buttons vertically */
+  .action-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .action-buttons .btn {
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+}

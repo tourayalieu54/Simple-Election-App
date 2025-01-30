@@ -1,0 +1,106 @@
+<div class="container-fluid d-flex flex-column" style="min-height: 100vh; padding: 0;">
+    <!-- Main Content -->
+    <div class="flex-grow-1 d-flex flex-column align-items-center justify-content-center" style="overflow: auto;">
+        <form [formGroup]="myForm" class="form-group p-4 rounded-5" (ngSubmit)="onSubmit()" style="width: 70%; background-color: #FCC737; overflow: auto;">
+            <img src="/signup.jpg" alt="sign up icon" class="img-fluid d-block mb-2 rounded-circle" style="max-width: 15%; margin: 0 auto;">
+            <h3 class="text-center">Please provide your details below, 
+                <em>ALL FIELDS ARE REQUIRED!</em>
+            </h3>
+            
+            <!-- Username Input -->
+            <div class="mb-3">
+                <label for="username" class="form-label">Username:</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                    <input formControlName="username" id="username" type="text" class="form-control" placeholder="Enter your username" required>
+                </div>
+            </div>
+            
+            <!-- Password Input -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>
+                    <input formControlName="password" id="password" type="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+            </div>
+
+            <!-- Re-enter Password -->
+            <div class="mb-3">
+                <label for="reEnterPassword" class="form-label">Re-enter Password:</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-check2-square"></i></span>
+                    <input formControlName="reEnterPassword" id="reEnterPassword" type="password" class="form-control" placeholder="Re-enter your password" required>
+                </div>
+                <div *ngIf="myForm.hasError('passwordMismatch') && myForm.get('reEnterPassword')?.touched" class="text-danger">
+                    Passwords do not match.
+                </div>
+            </div>
+
+            <!-- Role Selection -->
+            <div class="mb-3">
+                <label for="role" class="form-label">Select your role:</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-people"></i></span>
+                    <select formControlName="role" id="role" class="form-select" (change)="onRoleChange()" required>
+                        <option value="Voter">Voter</option>
+                        <option value="Candidate">Candidate</option>
+                        <option value="Officer">Officer</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Conditional Inputs -->
+            <div *ngIf="myForm.get('role')?.value === 'Admin'">
+                <div class="mb-3">
+                    <label for="staffId" class="form-label">Staff ID:</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-file-earmark-person"></i></span>
+                        <input formControlName="staffId" id="staffId" type="text" class="form-control" placeholder="Your staff ID" required>
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngIf="myForm.get('role')?.value === 'Voter'">
+                <div class="mb-3">
+                    <label for="matNumber" class="form-label">Matriculation Number:</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-file-earmark-person"></i></span>
+                        <input formControlName="matNumber" id="matNumber" type="text" class="form-control" placeholder="Enter your matriculation number" required>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="myForm.get('role')?.value === 'Candidate'">
+                <div class="mb-3">
+                    <label for="position" class="form-label">Select Position:</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-briefcase"></i></span>
+                        <select formControlName="position" id="position" class="form-select" (change)="fetchCandidatesByPosition()" required>
+                            <option value="president">President</option>
+                            <option value="treasurer">Treasurer</option>
+                            <option value="secretary">Secretary</option>
+                            <option value="chairman_IEC">IEC Chairman</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3" *ngIf="candidates.length > 0">
+                    <label for="candidate" class="form-label">Identify Yourself:</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-file-earmark-person"></i></span>
+                        <select formControlName="candidate" id="candidate" class="form-select" required>
+                            <option *ngFor="let candidate of candidates" [value]="candidate._id">
+                                {{ candidate.candidateInfo.firstName }} {{candidate.candidateInfo.middleName || ''}} {{ candidate.candidateInfo.lastName }} ({{ candidate.candidateInfo.matNumber }})
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </ng-container>
+
+            <!-- Submit and Cancel Buttons -->
+            <div class="d-flex justify-content-around mt-3">
+                <button type="submit" class="btn p-3" [disabled]="myForm.invalid" style="background-color: orange; border: 1px solid white; box-shadow: 5px 5px 8px black;">Submit</button>
+                <button routerLink="/home" class="btn p-3" type="button" style="border: 1px solid lavenderblush; box-shadow: 5px 5px 8px; background-color: orangered;">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

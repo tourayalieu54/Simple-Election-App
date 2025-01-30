@@ -1,0 +1,37 @@
+<div class="container-fluid" style="height: 90vh;">
+    <div class="row justify-content-center pt-5">
+        <div class="col-md-6">
+            
+            <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="text-primary rounded-5 p-5 mt-5 w-65" style="background-color: #FCC737;">
+                <img src="/login.png" alt="login icon" class="img-fluid w-25 d-block mx-auto" />
+                <h1 class="text-center">Please provide your credentials below</h1>
+                <hr>
+                <div *ngIf="wrongCredentials" class="text-danger text-center"><b>Wrong credentials, check your password and username and try again!</b></div>
+                <div class="mb-3">
+                    <label for="username" class="form-label" style="color: orange;"><b>Username:</b></label>
+                    <div class="input-group">
+                        <span class="input-group-text" style="background-color: orange;"><i class="bi bi-person"></i></span>
+                        <input type="text" id="username" formControlName="username" class="form-control" required placeholder="example@utg.com">
+                    </div>
+                    <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="text-danger">
+                        Please enter a valid email.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label" style="color: orange"><b>Password:</b></label>
+                    <div class="input-group">
+                        <span class="input-group-text" style="background-color: orange;"><i class="bi bi-shield-lock"></i></span>
+                        <input type="password" id="password" formControlName="password" class="form-control" required placeholder="your passwod">
+                    </div>
+                    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+                        Password is required.
+                    </div>
+                </div>
+
+                <button type="submit" class="btn w-100 mt-3 mb-3" id="text-primary">Login</button>
+                <p class="no-account">You don't have an account, sign up <a href="/signup">here</a></p>
+            </form>
+        </div>
+    </div>
+</div>

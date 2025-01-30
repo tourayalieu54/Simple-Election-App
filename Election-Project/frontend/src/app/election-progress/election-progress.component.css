@@ -1,0 +1,57 @@
+.election-progress-container{
+    min-height: 100vh;
+    color: white;
+    text-align: center;
+}
+
+.winner-table{
+    text-align: left;
+    margin: 0 auto;
+    border-left: 2px solid white;
+    min-width: 60%;
+    color: orange;
+   
+}
+
+th{
+    text-align: center;
+    /* text-decoration: underline whitesmoke; */
+    background-color: orange;
+    color: white;
+    font-size:larger;
+    border-left: 2px solid white;
+}
+td{
+    border-right: 2px solid whitesmoke;
+    background-color: white;
+    border-bottom: 2px solid orange;
+    text-align: center;
+    border-right: 2px solid orange;
+}
+
+.winner-container{
+    margin-top: 5rem;
+}
+
+.result-icon{
+    width: 15%;
+    box-shadow: 5px 5px 8px black;
+    margin-bottom: 3rem;
+}
+
+/* For my table (responsivity) */
+@media screen and (max-width: 768px) {
+    /* Scrollable table for smaller screens */
+    .winner-table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  
+    /* Compact table rows */
+    .winner-table th, .table td {
+      padding: 0.5rem;
+      font-size: 0.875rem;
+    }
+}
+

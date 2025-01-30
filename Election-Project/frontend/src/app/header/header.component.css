@@ -1,0 +1,19 @@
+.nav-item a{
+    color: #fff;
+}
+
+.nav-item a:hover{
+    color: orangered;
+    font-size: 13px;
+}
+#head-inline{
+    display: inline;
+}
+
+@media (max-width: 767px) {
+    
+    .navbar-brand{
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,51 @@
+<div class="container" style="height: 90vh;">
+    <h1 class="text-center text-warning mt-1">Student Dashboard</h1>
+    <hr>
+    <h2 style="text-align: center;">Welcome dear {{studentName}}</h2>
+    <img id="iec-logo" src="/iec.png" alt="IEC Logo" style="margin: 0 auto; width: 25%; display: block;">
+    <div class="notes" style="text-align: center;">
+        <h3><b>Here is what you can do:</b></h3>
+         
+         <p style="font-size: 13px;"><b>Click on the buttons below to do the respective operation, see you on the other side!</b></p>
+    </div>
+    <div id="buttons" class="mt-4">
+        <button class="btn btn-primary" (click)="openNominationModal()">Get Nominated</button>
+        <button class="btn btn-secondary" (click)="navigateToVote()">Vote Candidate</button>
+    </div>
+
+    <!-- Nomination Modal -->
+    <div *ngIf="showModal" class="modal-overlay">
+        <div class="modal-container">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title">Get Nominated</h2>
+              <button type="button" class="close-btn" (click)="onCancel()">
+                <span>&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="nominationForm" (ngSubmit)="onSubmitNomination()">
+                <div class="form-group">
+                  <label for="party">Select Party</label>
+                  <select id="party" formControlName="party" required>
+                    <option value="" disabled selected>Choose a party</option>
+                    <option *ngFor="let party of parties" [value]="party.value">{{ party.label }}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="position">Select Position</label>
+                  <select id="position" formControlName="position" required>
+                    <option value="" disabled selected>Choose a position</option>
+                    <option *ngFor="let position of positions" [value]="position.value">{{ position.label }}</option>
+                  </select>
+                </div>
+                <div class="button-group">
+                  <button type="submit" class="btn btn-primary">Submit Nomination</button>
+                  <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      

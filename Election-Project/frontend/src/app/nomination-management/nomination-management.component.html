@@ -1,0 +1,50 @@
+<div class="container-fluid" style="height: 90vh;">
+    <h1 class="text-center">Nomination Management</h1>
+    <hr />
+  
+    <div *ngIf="nominations.length > 0; else noNominations">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Candidate Name</th>
+            <th>Party</th>
+            <th>Position</th>
+            <th>Approved</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let candidate of nominations; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ candidate.candidateInfo.firstName }} {{candidate.candidateInfo.middleName}} {{candidate.candidateInfo.lastName}}</td>
+            <td>{{ candidate.party }}</td>
+            <td>{{ candidate.position }}</td>
+            <td>{{ candidate.isApproved ? 'Yes' : 'No' }}</td>
+            <td>
+              <button
+                *ngIf="!candidate.isApproved"
+                class="btn btn-success btn-sm"
+                (click)="approveCandidate(candidate._id)"
+              >
+                Approve
+              </button>
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="deleteCandidate(candidate._id)"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <ng-template #noNominations>
+        <div class="justify-content-center">
+            <p class="text-center fs-5 text-info">No nominations available yet.</p>
+        </div>
+    </ng-template>
+  </div>
+  

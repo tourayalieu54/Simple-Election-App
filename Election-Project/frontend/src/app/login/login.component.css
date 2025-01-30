@@ -1,0 +1,42 @@
+
+
+h1 {
+    color: orange; /* Bootstrap primary color */
+}
+
+#text-primary:hover {
+    background-color: orange;
+    color: rgb(248, 190, 83);
+}
+
+#text-primary{
+    color: rgba(236, 144, 69, 0.575);
+    background-color: rgb(248, 190, 83);
+    box-shadow: 5px 5px 15px black;
+    border-radius: 8px;
+}
+
+.text-primary {
+    /* font-weight: 300;
+    font-size: 20px;
+    color: grey;*/
+    color: orange;
+        background-color: rgb(248, 190, 83); /* Bright orange background */
+        /* width: 300px; Set a width for the element */
+        /* height: 200px; Set a height for the element */
+        box-shadow: 5px 5px 15px black; /* Black shadow with offset and blur */
+        border-radius: 8px; /* Optional: Rounded corners */
+    /* } */
+    
+  }
+  
+  .no-account{
+    place-self: center;
+    color: grey;
+  }
+
+  .no-account > a{
+    /* color: rgb(206, 226, 22); */
+    color: orangered;
+    font-size: 13px;
+  }

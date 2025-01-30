@@ -1,0 +1,114 @@
+<div class="container">
+    <h2 class="heading">Student Management Page</h2>
+    <hr style="color: orange;">
+    <div class="form-container" [formGroup]="matNumberSearchForm">
+        <button class="add-student-button" (click)="iniateAddingStudent()">Add a student</button>
+        <div class="form-group">
+            <label class="form-label" for="matriculation">Search: </label>
+            <input formControlName="matNumber" id="matriculation" type="text" class="form-control" placeholder="search by matriculation number" (input)="fetchStudents()">
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>ID</th>
+                <th>Student Name</th>
+                <th>Matriculation Number</th>
+                <th>Department</th>
+                <th>Actions (Update or Delete Students)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of filteredStudents; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{student?._id}}</td>
+                <td>
+                    {{student?.firstName}} {{student?.middleName}} {{student?.lastName}}
+                </td>
+                <td>
+                    {{student?.matNumber}}
+                </td>
+                <td>
+                    {{student?.department}}
+                </td>
+                <td class="action-buttons">
+                    <button class="btn btn-warning" (click)="setToUpdate(student)">Edit Student</button>
+                    <button class="btn" style="background-color: orangered;" (click)="goToDeleteStudentConfirmation(student)">Delete Student</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="modal fade" tabindex="-1" [ngClass]="{'show': showStudentFormModal}" [style.display]="showStudentFormModal ? 'block': 'none'">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 *ngIf="wannaUpdateStudent" class="modal-title">Update Student Information</h3>
+                    <h3 *ngIf="wannaAddStudent" class="modal-title">Add A Student</h3>
+                    <h3 *ngIf="wannaDeleteStudent" class="modal-title">Delete a student</h3>
+                    <input type="button" class="btn-close" (click)="closeModal()">
+                </div>
+                <div class="modal-body">
+                    <form  *ngIf="!wannaDeleteStudent" [formGroup]="studentForm" (ngSubmit)="decideSubmission()" class="form">
+                        <div [style.display]="!showUpdateStudentConfirmation ? 'block' : 'none'">
+                            <div class="form-group">
+                                <label for="firstName" class="form-label"><b>First Name:</b></label>
+                                <input formControlName="firstName" id="firstName" type="text" class="form-control" required placeholder="Your first name here please...">
+                            </div>
+                            <div class="form-group">
+                                <label for="middleName" class="form-label"><b>Middle Name:</b></label>
+                                <input formControlName="middleName" id="middleName" type="text" class="form-control" placeholder="Your middle name here, if applicable...">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName" class="form-label"><b>Last Name:</b></label>
+                                <input id="lastName" formControlName="lastName" type="text" class="form-control" required placeholder="Your last name here...">
+                            </div>
+                            <div class="form-group">
+                                <label for="matNumber" class="form-label"><b>Matriculation Number:</b></label>
+                                <input id="matNumber" formControlName="matNumber" type="text" class="form-control" required placeholder="You matriculation number here...">
+                            </div>
+                            <div class="form-group">
+                                <label for="department" class="form-label"><b>Department:</b></label>
+                                <input id="department" formControlName="department" type="text" class="form-control" required placeholder="Your department here, example: School of ICT">
+                            </div>
+                            <div class="form-buttons">
+                                <button *ngIf="wannaUpdateStudent" type="button" (click)="updateConfirmed()" class="btn submit"[disabled]="studentForm.invalid" >Submit</button>
+                                <button *ngIf="wannaAddStudent" type="submit" class="btn submit"[disabled]="studentForm.invalid" >Submit</button>
+                                <button (click)="closeModal()" class="btn cancel">Cancel</button>
+                            </div>
+                        </div>
+                        <div class="admin-info" [style.display]="showUpdateStudentConfirmation ? 'block' : 'none'">
+                            <h3>Confirm you want to change this student's information to this?</h3>
+                            <ul>
+                                <li><b>First Name:</b> {{temporalStudentUpdateData?.firstName}}</li>
+                                <li><b>Middle Name:</b> {{temporalStudentUpdateData?.middleName || ''}}</li>
+                                <li><b>Last Name:</b> {{temporalStudentUpdateData?.lastName}}</li>
+                                <li><b>Matriculation Number:</b> {{temporalStudentUpdateData?.matNumber}}</li>
+                                <li><b>Department:</b> {{temporalStudentUpdateData?.department}}</li>
+                            </ul>
+                            <div class="mb-3 confirm-modal-buttons">
+                                <button class="submit" type="submit">Yes</button>
+                                <button class="cancel" type="button" (click)="closeModal()">No</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Delete confirmation -->
+                     <div *ngIf="wannaDeleteStudent" class="delete-confirmation" [style.display]="wannaDeleteStudent">
+                        <h4>Are you sure you want to delete this student? <em><i>ATTENTION: </i>Procedure cannot be undone!</em></h4>
+                        <ul>
+                            <li><b>First Name:</b> {{temporalStudentUpdateData?.firstName}}</li>
+                            <li><b>Middle Name:</b> {{temporalStudentUpdateData?.middleName || ''}}</li>
+                            <li><b>Last Name:</b> {{temporalStudentUpdateData?.lastName}}</li>
+                            <li><b>Matriculation Number:</b> {{temporalStudentUpdateData?.matNumber}}</li>
+                            <li><b>Department:</b> {{temporalStudentUpdateData?.department}}</li>
+                        </ul>
+                        <div class="mb-3 confirm-modal-buttons">
+                            <button class="button" type="submit" (click)="deleteStudent()" >Yes</button>
+                            <button class="cancel" type="button" (click)="closeModal()">No</button>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

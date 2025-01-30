@@ -1,0 +1,22 @@
+<div class="container">
+    <h1 class="text-center">Candidate Dashboard</h1>
+    <hr>
+    <div >
+        <h3 class="welcoming-candidate">You are welcome, dear {{ candidate.candidateInfo?.firstName }} {{candidate.candidateInfo?.middleName || ''}} {{ candidate.candidateInfo?.lastName }}!</h3>
+        <div class="candidate-info">
+            <h4>Here is your most current information as a candidate</h4>
+            <hr>
+            <h5>Your Position: {{ candidate.position }}</h5>
+            <h5>Your Party: {{ candidate.party }}</h5>
+            <h5>Your Votes: {{ votes }}</h5>
+        </div>
+        <div class="action-buttons">
+            <button class="withdraw-button" (click)="withdrawCandidacy()">Withdraw Candidacy</button>
+            <button class="vote-button" (click)="navigateToVote()">Vote Candidates</button>
+        </div>
+    </div>
+
+    <div *ngIf="!candidate">
+        <p>Loading candidate information...</p>
+    </div>
+</div>

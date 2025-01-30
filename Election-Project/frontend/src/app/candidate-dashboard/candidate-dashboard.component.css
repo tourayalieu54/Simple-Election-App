@@ -1,0 +1,52 @@
+.container{
+    min-height: 100vh;
+    color: orange;
+}
+
+.text-center{
+    margin: 2rem;
+}
+
+.welcoming-candidate{
+    text-align: center;
+}
+
+.candidate-info{
+    display: block;
+    margin: 3rem auto;
+    background-color: white;
+    box-shadow: 5px 5px 8px black;
+    border-top: 2px solid orange;
+    border-left: 2px solid orange;
+    width: 50%;
+    border-radius: 3rem;
+    padding: 3rem;
+    min-height: 40vh;
+}
+
+button {
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 5px 5px 8px black;
+    border: none;
+    cursor: pointer;
+}
+
+.action-buttons{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+button:hover{
+    transition: 0.2s;
+    transform: scale(1.05);
+    background-color: white;
+}
+
+.withdraw-button{
+    background-color: orangered;
+}
+
+.vote-button{
+    background-color: orange;
+}

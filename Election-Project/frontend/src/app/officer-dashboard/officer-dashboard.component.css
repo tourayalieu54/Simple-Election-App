@@ -1,0 +1,42 @@
+.container-fluid{
+    background: url('/utg.jpeg') no-repeat center center/cover;
+}
+.card {
+    border-radius: 10px; 
+}
+
+.card-header {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.card-body {
+    padding: 20px; 
+}
+
+button {
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 5px 5px 8px black;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+}
+
+.bg-orange {
+    background-color: #fd7e14; 
+}
+
+button:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .btn {
+        width: 100%; /* Make buttons full width on smaller screens */
+        margin-bottom: 10px; /* Space between buttons */
+    }
+}

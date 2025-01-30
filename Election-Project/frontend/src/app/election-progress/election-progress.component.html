@@ -1,0 +1,48 @@
+<div class="election-progress-container" *ngIf="latestElection">
+    <h1 style="margin-top: 3rem;">Election Progress</h1>
+    <h3>Latest Election Date: {{ latestElection.startDate | date }}</h3>
+
+    <div *ngIf="latestElection.isActive">
+        <h4>Ongoing Election Results</h4>
+        <canvas id="voteChart"></canvas>
+        
+        <div *ngFor="let position of Object.keys(candidatesByPosition)">
+            <h5>{{ position }}</h5>
+            <ul>
+                <li *ngFor="let candidate of candidatesByPosition[position]">
+                    {{ candidate.candidateInfo?.firstName }} {{ candidate.candidateInfo?.lastName }} - Votes: {{ candidate.votes }}
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+
+    <div *ngIf="!latestElection.isActive" class="winner-container">
+        <img class="result-icon" src="/voting-results.svg" alt="vote result icon">
+        <h2>The Winners of the above election date are listed below</h2>
+        <table class="winner-table">
+            <thead>
+                <tr>
+                    <th>Position</th>
+                    <th>Winner</th>
+                    <th>Matriculation Number</th>
+                    <th>Party</th>
+                    <th>Number Of Votes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let position of Object.keys(winners)">
+                    <td>{{ position }}</td>
+                    <td>{{ winners[position]?.candidateInfo.firstName || 'NA' }} {{winners[position]?.candidateInfo.middleName || ''}} {{winners[position]?.candidateInfo.lastName || ''}}</td>
+                    <td>{{winners[position]?.candidateInfo.matNumber || 'NA'}}</td>
+                    <td>{{winners[position]?.party || 'NA'}}</td>
+                    <td>{{winners[position]?.votes || 'NA'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div *ngIf="!latestElection" style="min-height: 100vh;">
+    <p>No elections found.</p>
+</div>

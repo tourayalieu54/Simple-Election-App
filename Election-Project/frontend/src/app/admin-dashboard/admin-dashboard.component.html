@@ -1,0 +1,154 @@
+<div class="admin-dashboard-container">
+    <h1>Admin Dashboard</h1>
+    <hr style="color: orange;">
+    <img class="admin-icon" src="admin.png" alt="admin icon">
+    <div class="admin-operations">
+        <div class="admin-info">
+            <h3>Admin Personal Information</h3>
+            <ul>
+                <li><b>Name:</b> {{adminName}}</li>
+                <li><b>Occupation:</b> {{admin?.occupation}}</li>
+                <li><b>Staff ID:</b> {{admin?.staffId}}</li>
+            </ul>
+        </div>
+        <div class="admin-operate-buttons">
+            <button style="background-color: orange;" (click)="onClickUpdateAdminButton()">
+                Update Your Info
+            </button>
+            <button style="background-color: orangered;" (click)="onClickResignationButton()">
+                Resign As Admin
+            </button>
+            <button class="bg-warning" style="padding: 1rem 2.3rem;" (click)="onClickAddAdminButton()">
+                Add Admin
+            </button>
+        </div>
+    </div>
+    <div class="management-buttons">
+        <button [routerLink]="['/user-management']">
+            User Management
+        </button>
+        <button [routerLink]="['/student-management']">
+            Student Management
+        </button>
+        <button (click)="displayElectoralOfficer()">Chairman SU-IEC</button>
+    </div>
+    <div class="modal fade" tabindex="-1" [ngClass]="{'show': showResignationConfirmationModal}" [style.display]="showResignationConfirmationModal ? 'block' : 'none'">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Confirm Resignation</h3>
+                    <input type="button" class="btn-close" (click)="closeModal()">
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <p><b>Are you sure you want to resign as an admin? <em>Note that you cannot undo this procedure!</em></b></p>
+                    </div>
+                    <div class="mb-3 modal-buttons">
+                        <button class="submit" type="submit" (click)="setResignationConfirmation()">Yes</button>
+                        <button class="cancel" type="button" (click)="closeModal()">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" [ngClass]="{'show': showModal}" [style.display]="showModal ? 'block' : 'none'">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Update Admin Info</h3>
+                    <input type="button" class="btn-close" (click)="closeModal()">
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="updateAdminInfo" (ngSubmit)="onSubmit()" class="form">
+                        <div [style.display]="showConfirmation ? 'none' : 'block'">
+                            <div class="mb-3">
+                                <label for="firstName" class="form-label"><b>First Name:</b></label>
+                                <input formControlName="firstName" type="text" id="firstName" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="middleName" class="form-label"><b>Middle Name:</b></label>
+                                <input formControlName="middleName" type="text" id="middleName" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="lastName" class="form-label"><b>Last Name:</b></label>
+                                <input formControlName="lastName" type="text" class="form-control" id="lastName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="occupation" class="form-label"><b>Occupation:</b></label>
+                                <input formControlName="occupation" type="text" class="form-control" id="occupation" required>
+                            </div>
+                            <div class="mb-3 modal-buttons">
+                                <button class="submit" type="button" [disabled]="updateAdminInfo.invalid" (click)="invokeConfirmation()">Submit</button>
+                                <button class="cancel" type="button" (click)="closeModal()">Cancel</button>
+                            </div>
+                        </div>
+                        <div class="admin-info" [style.display]="showConfirmation ? 'block' : 'none'">
+                            <h3>Confirm you want to change your information to this?</h3>
+                            <ul>
+                                <li><b>First Name:</b> {{temporalPayload?.firstName}}</li>
+                                <li><b>Middle Name:</b> {{temporalPayload?.middleName || ''}}</li>
+                                <li><b>Last Name:</b> {{temporalPayload?.lastName}}</li>
+                                <li><b>Occupation:</b> {{temporalPayload?.occupation}}</li>
+                            </ul>
+                            <div class="mb-3 modal-buttons">
+                                <button class="submit" type="submit" (click)="onSubmit()">Yes</button>
+                                <button class="cancel" type="button" (click)="closeModal()">No</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" [ngClass]="{'show': showAddAdminModal}" [style.display]="showAddAdminModal ? 'block' : 'none'">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 *ngIf="!showElectoralOfficer" class="modal-title">
+                        Add another admin
+                    </h3>
+                    <h3 *ngIf="showElectoralOfficer" class="modal-title">Current Student Union Electoral Officer Chairman</h3>
+                    <input type="button" class="btn-close" (click)="closeAddAdminModal()">
+                </div>
+                <div class="modal-body">
+                    <form *ngIf="!showElectoralOfficer" [formGroup]="addAdminForm" (ngSubmit)="onAddAdmin()" class="form">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label"><b>First Name:</b></label>
+                            <input id="firstName" formControlName="firstName" type="text" class="form-control" placeholder="Your first name here.." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="middleName" class="form-label"><b>Middle Name:</b></label>
+                            <input formControlName="middleName" id="middleName" type="text" class="form-control" placeholder="Your middle name if you have one..">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="form-label"><b>Last Name:</b></label>
+                            <input id="lastName" formControlName="lastName" type="text" class="form-control" placeholder="Your last name here.." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="occupation" class="form-label"><b>Occupation:</b></label>
+                            <input formControlName="occupation" id="occupation" type="text" class="form-control" placeholder="Your profession here.." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="staffId" class="form-label"><b>Staff ID:</b></label>
+                            <input id="staffId" formControlName="staffId" type="text" class="form-control" placeholder="Your staff ID here.." required>
+                        </div>
+                        <div class="mb-3 mt-3 modal-buttons">
+                            <button class="submit" type="submit" [disabled]="addAdminForm.invalid">Submit</button>
+                            <button class="cancel" type="button" (click)="closeAddAdminModal()">Cancel</button>
+                        </div>
+                    </form>
+                    <div [style.display]="showElectoralOfficer ? 'block' : 'none'">
+                        <ul>
+                            <li><b>Full Name: </b>{{electoralOfficer?.officerInfo?.firstName}} {{electoralOfficer?.officerInfo?.middleName || ''}} {{electoralOfficer?.officerInfo?.lastName}}</li>
+                            <li><b>Matriculation Number: </b>{{electoralOfficer?.officerInfo?.matNumber}}</li>
+                            <li><b>Department: </b>{{electoralOfficer?.officerInfo?.department}}</li>
+                            <li><b>Position: </b>{{electoralOfficer?.position}}</li>
+                            <li><b>Account Username: </b>{{officerUserAccount?.username || 'Does not have a user account yet!'}}</li>
+                        </ul>
+                        <button (click)="closeAddAdminModal()">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

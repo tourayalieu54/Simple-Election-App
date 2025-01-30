@@ -1,0 +1,70 @@
+/* Card Styling */
+.position-card-container{
+    display: flex;
+}
+.candidate-card {
+    background-color: #f8f9fa; /* Light background */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 30vw;
+}
+
+/* Hover effect */
+.candidate-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Title and Info */
+.candidate-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #007bff; /* Blue color for name */
+    margin-bottom: 10px;
+}
+
+.candidate-info {
+    font-size: 1.1em;
+    color: #495057; /* Darker text for description */
+    margin-bottom: 15px;
+}
+
+/* Vote Button */
+.vote-btn {
+    background-color: #28a745; /* Green button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.vote-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .candidate-card {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .candidate-name {
+        font-size: 1.3em;
+    }
+
+    .candidate-info {
+        font-size: 1em;
+    }
+
+    .vote-btn {
+        width: 100%; /* Full-width button on small screens */
+        padding: 12px;
+    }
+}

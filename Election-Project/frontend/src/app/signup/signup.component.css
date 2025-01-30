@@ -1,0 +1,16 @@
+.form-group{
+    box-shadow: 5px 5px 15px black;
+    border-radius: 8px;
+    color: orangered;
+}
+  
+  .image-top {
+    width: 50%;
+    height: 50px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .input-group-text{
+    background-color: orange;
+  }
