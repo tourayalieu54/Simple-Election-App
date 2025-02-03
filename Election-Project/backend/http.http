@@ -1,0 +1,251 @@
+POST http://localhost:3000/api/students
+Content-Type: application/json
+Accept: application/json
+
+{
+    "firstName": "Lamin",
+    "lastName": "Saidy",
+    "matNumber": "22223333",
+    "department": "School of Digital Marketing"
+}
+
+###
+POST http://localhost:3000/api/students
+Content-Type: application/json
+Accept: application/json
+
+{
+    "firstName": "Pa",
+    "middleName": "Sulay",
+    "lastName": "Jobe",
+    "matNumber": "11111111",
+    "department": "ICT"
+}
+###
+
+PATCH http://localhost:3000/api/students/675ed3d0bef020ab8d83fc58
+Content-Type: application/json
+
+{
+    "department": "Agriculture"
+}
+###
+GET http://localhost:3000/api/students
+
+###
+GET http://localhost:3000/api/students/find/22226063
+
+###
+GET http://localhost:3000/api/students/6761b52c92756432cfec05a2
+
+###
+DELETE http://localhost:3000/api/students/676b55f46df4b7d66b3b0e4c
+#################################
+
+# Candidate HTTP Tests
+POST http://localhost:3000/api/candidates
+Content-Type: application/json
+Accept: application/json
+
+{
+    "party": "Alliance Party",
+    "electionType": "General",
+    "position": "President",
+    "candidateInfo":{
+        "firstName": "Rohey",
+        "lastName": "Jatta",
+        "matNumber": "22222222",
+        "department": "SICT",
+        "_id": "676b55f46df4b7d66b3b0e4c"
+    }
+}
+
+
+###
+POST http://localhost:3000/api/candidates
+Content-Type: application/json
+Accept: application/json
+
+{
+    "party": "Solutionist Party",
+    "electionType": "Departmental",
+    "position": "President",
+    "candidateInfo": "67637c420880328ff9f1fb47"
+}
+
+
+###
+GET http://localhost:3000/api/candidates
+
+###
+GET http://localhost:3000/api/candidates/6760cd4ddb7dc19a16dd3f67
+
+###
+
+GET http://localhost:3000/api/candidates/fetch/President
+
+###
+PATCH http://localhost:3000/api/candidates/6760e5791ffbd0a973ea4eb4
+Content-Type: application/json
+
+{
+    "party": "UDP"
+}
+
+###
+DELETE http://localhost:3000/api/candidates/676b56896df4b7d66b3b0e50
+
+########################################################
+# Electoral officer Api tests
+
+POST http://localhost:3000/api/electoralOfficer
+Content-Type: application/json
+
+{
+    "position": "Chairman",
+    "officerInfo": "677754d8080f74563f2e6f21"
+}
+
+###
+
+POST http://localhost:3000/api/electoralOfficer
+Content-Type: application/json
+
+{
+    
+    "officerInfo": "677754d8080f74563f2e6f21"
+}
+
+###
+
+GET http://localhost:3000/api/electoralOfficer
+
+###
+
+GET http://localhost:3000/api/electoralOfficer/6761bcc6c0640ba27742fcde
+
+###
+
+PATCH http://localhost:3000/api/electoralOfficer/6761b54492756432cfec05a4
+Content-Type: application/json
+
+{
+    "role": "Coordinator"
+}
+
+###
+
+DELETE http://localhost:3000/api/electoralOfficer/679bca3a403f9c65281fdc3a
+###############################################################
+# Testing my election
+
+POST http://localhost:3000/api/signup
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username": "pasulay@utg.com",
+    "password": "helloworld",
+    "role": "voter",
+    "matNumber": "11111111"
+}
+
+###
+# Election functionalities
+GET http://localhost:3000/api/elections
+
+###
+DELETE http://localhost:3000/api/elections/678b7194e8ca2a9f8d5caa16
+
+###
+POST http://localhost:3000/api/elections
+Content-Type: application/json
+
+{
+    "duration": "1",
+    "startDate": "03/01/2025"
+}
+
+### Login test
+POST http://localhost:3000/api/login
+Content-Type: application/json
+Accept: application/json
+
+{
+    "username": "fatimaofficer@utg",
+    "password": "alieu"
+}
+
+###
+GET http://localhost:3000/api/profile
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3N2IzMWI4ZDIxMmUwMGJjOTEzZWY0NiIsInJvbGUiOiJWb3RlciIsInJlZmVyZW5jZUlkIjoiNjc3NzU1OGIwODBmNzQ1NjNmMmU2ZjJhIiwiaWF0IjoxNzM2MzU5NzIwLCJleHAiOjE3MzYzNjMzMjB9.07u7hUaxVDJsfGBomJ_U4Y1nQiXMkc154akEWN7OCj0
+
+###
+GET http://localhost:3000/api/users
+###
+
+PATCH http://localhost:3000/api/user/67693d77c1263f55949832e4
+Content-Type: application/json
+
+{
+    "role": "Voter"
+}
+###
+DELETE http://localhost:3000/api/delete
+
+###
+DELETE http://localhost:3000/api/users/"677b31b8d212e00bc913ef46
+###
+
+POST http://localhost:3000/api/electoralOfficer
+Content-Type: application/json
+
+{
+    "position": "Chairman",
+    "officerInfo": "67735f8a28498534faa72da6"
+}
+
+###
+GET http://localhost:3000/api/elections
+###
+
+DELETE http://localhost:3000/api/elections/679e0e0f6c96b024d8ee4641
+##########################################################
+#Admin http tests
+
+POST http://localhost:3000/api/admins
+Content-Type: application/json
+Accept: application/json
+
+{
+    "firstName": "Fatima",
+    "middleName": "Al-Amin",
+    "lastName": "Kinteh",
+    "occupation": "Nutritionist",
+    "staffId": "Alibaba1"
+}
+
+###
+POST http://localhost:3000/api/admins
+Content-Type: application/json
+Accept: application/json
+
+{
+    "firstName": "Alieu",
+    "lastName": "Touray",
+    "occupation": "Software Engineer",
+    "staffId": "fatima"
+}
+###
+GET http://localhost:3000/api/admins/677ee550485a3d13750b8a18
+
+###
+GET http://localhost:3000/api/admins
+###
+DELETE http://localhost:3000/api/admins/67815401b1aac2ad76119c9b
+
+###
+GET http://localhost:3000/api/votes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OGFkZGE4MTg2MjVkNzc5NjQ1OTU0OSIsInJvbGUiOiJPZmZpY2VyIiwicmVmZXJlbmNlSWQiOiI2NzhhZDkyNzE4NjI1ZDc3OTY0NTk0ZDIiLCJpYXQiOjE3MzcxOTg3MTUsImV4cCI6MTczNzIwMjMxNX0.wiwKKsHvWTPCnRJDCw4kt_w48vEtywli7j4kmAf5yN0
